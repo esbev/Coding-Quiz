@@ -1,0 +1,88 @@
+* {}
+
+a {
+  display: inline-block;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+header p {
+  margin-right: 20px;
+  margin-top: 0;
+  float: right;
+  font-size: 20px;
+}
+
+body {
+
+}
+
+main h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 32px;
+}
+
+section {
+  display: block;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+section p {
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+button {
+  border: none;
+  background-color: rgb(0, 0, 129);
+  color: white;
+  font-size: 20px;
+  border-radius: 8px;
+}
+
+button:hover {
+  background-color: rgb(190, 107, 211);
+}
+
+.start-container {
+  display: block;
+  justify-content: center;
+}
+
+.quiz-container {
+  display: block;
+  border-bottom: 2px;
+  border-color: black;
+}
+
+.quiz-container span {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 20px;
+  color: green;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  padding-top: 5px;
+}
+
+.result-container p, label {
+  font-size: 20px;
+}
+
+.score-container ol {
+  font-size: 20px;
+}
+
+.score-container a {
+  color: white;
+}
+
+
+

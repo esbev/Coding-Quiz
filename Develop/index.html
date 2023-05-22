@@ -1,40 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheet" href="./assets/css/reset.css"> -->
-    <link rel="stylesheet" href="./assets/css/style.css">
-    <title>Coding Quiz</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <link rel="stylesheet" href="./assets/css/reset.css"> -->
+  <link rel="stylesheet" href="./assets/css/style.css">
+  <title>Coding Quiz</title>
 </head>
 <body>
-    <header>
-        <a href="highscore.html">View High Scores</a>
-        <p id="timer">Time Left: <span id="time-left">0</span></p>
-    </header>
-    <section id="before-start">
+  <header>
+      <a id= "view-scores" href="#">View High Scores</a>
+      <p id="timer">Time Left: <span id="time-left">0</span></p>
+  </header>
+  <main>
+    <section id="before-start" class="start-container">
         <h1>Coding Quiz</h1>
-        <p>Quiz to test your knowldege</p>
+        <p>Try to answer the code related questions within the time limit.
+          <br> 
+           Keep in mind incorrect answers will not only penalize your score, 
+           but will also reduce your time.</p>
         <button id="start-button">Start</button>
     </section>
-    <section id="quiz-container">
+    <section id="quiz-start" class="quiz-container">
+        <h1 id="question">Question</h1>
         <ul id="quiz-questions">
-            <li><h2 id="question">Question</h2></li>
             <li><button id="choice-1">1: Choice 1</button></li>
             <li><button id="choice-2">2: Choice 2</button></li>
             <li><button id="choice-3">3: Choice 3</button></li>
             <li><button id="choice-4">4: Choice 4</button></li>
         </ul>
-        <span id="question-result">No question has been answered yet.</span>
+        <span id="question-result">Questions are unanswered</span>
     </section>
-    <section id="quiz-over">
+    <section id="quiz-over" class="result-container">
         <h1>All Done!</h1>
         <p>Your final score is: <span id="user-score">0</span></p>
         <label for="user-initials">Enter Your initials: </label>
         <input type="text" id="user-initials" name="user-initials">
         <button id="submit">Submit</button>
     </section>
-    <script src="./assets/js/script.js"></script>
+    <section id="high-scores" class="score-container">
+        <h1>High Scores</h1>
+        <ol id="scores"></ol>
+        <button id="go-back"><a href="index.html">Back to Quiz</a></button>
+        <button id="clear-scores">Clear high scores</button>
+    </section>
+  </main>
+  <footer>
+
+  </footer>
+  <script src="./assets/js/script.js"></script>
 </body>
 </html>
