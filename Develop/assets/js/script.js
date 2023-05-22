@@ -57,15 +57,15 @@ var resultText = true;
 
 function init() {
   //set initial view
-  // quizView.setAttribute("style", "display: none;");
-  // endView.setAttribute("style", "display: none;");
-  // scoreView.setAttribute("style", "display: none;");
+  quizView.setAttribute("style", "display: none;");
+  endView.setAttribute("style", "display: none;");
+  scoreView.setAttribute("style", "display: none;");
 }
 
 function startQuiz() {
   //change view on start
-  // beforeView.setAttribute("style", "display: none;");
-  // quizView.setAttribute("style", "display: visible;");
+  beforeView.setAttribute("style", "display: none;");
+  quizView.setAttribute("style", "display: visible;");
 
   setQuestionText();
 
@@ -75,8 +75,8 @@ function startQuiz() {
         if (!timeLeft) {
             clearInterval(gameInterval);
             //change to end of quiz view when timer finish
-            // quizView.setAttribute("style", "display: none;");
-            // endView.setAttribute("style", "display: visible;");
+            quizView.setAttribute("style", "display: none;");
+            endView.setAttribute("style", "display: visible;");
             userScore = Math.round(correctAnswers/questionTextArray.length*100);
             scoreText.textContent = userScore;
         }
@@ -106,7 +106,10 @@ function saveHighScore () {
   }
 
   //change to scoreView
-  // scoreView.setAttribute("style", "display: visible;")
+  beforeView.setAttribute("style", "display: none;");
+  quizView.setAttribute("style", "display: none;");
+  endView.setAttribute("style", "display: none;");
+  scoreView.setAttribute("style", "display: visible;")
   // need to populate a list in a loop with scores array
   // for (i = 0; i < highScores.length; i++) {
   // }
@@ -153,7 +156,7 @@ function checkAnswer(x) {
     }
     if (questionIndex == questionTextArray.length-1) {
       //changes to endView
-      // endView.setAttribute("style", "display: none;");
+      endView.setAttribute("style", "display: none;");
       timeLeft = 1;
     } else {
       questionIndex++;
