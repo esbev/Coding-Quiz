@@ -15,9 +15,18 @@ var clearButton = document.getElementById("clear-scores");
 var questionResultText = document.getElementById("question-result");
 var scoreText = document.getElementById("user-score");
 var userInitials = document.getElementById("user-initials");
+var userScore = "";
+var timeLeft = 40;
+var timerSpeed = 1000;
+var clickCount = 0;
+var correctAnswers = 0;
+var answerCount = 0;
+var answerString = "";
+var resultText = true;
 
 var scoreList = document.getElementById("scores");
-var liEl = document.createElement("li");
+var highScorePlacecholder = [];
+// var liEl = document.createElement("li");
 
 var questionIndex = 0;
 var questionTextArray = [
@@ -47,25 +56,17 @@ var choice4Text = [
   "1"];
 var correctAnswerIndex = [3,4,1,4];
 
-var userScore = "";
-var timeLeft = 40;
-var timerSpeed = 1000;
-var clickCount = 0;
-var correctAnswers = 0;
-var answerString = "";
-var resultText = true;
-
 function init() {
-  //set initial view
+  ///////////////////////set initial view
   quizView.setAttribute("style", "display: none;");
   endView.setAttribute("style", "display: none;");
   scoreView.setAttribute("style", "display: none;");
 }
 
 function startQuiz() {
-  //change view on start
-  beforeView.setAttribute("style", "display: none;");
-  quizView.setAttribute("style", "display: visible;");
+  //////////////////////change view on start
+  // beforeView.setAttribute("style", "display: none;");
+  // quizView.setAttribute("style", "display: visible;");
 
   setQuestionText();
 
@@ -74,9 +75,9 @@ function startQuiz() {
 
         if (!timeLeft) {
             clearInterval(gameInterval);
-            //change to end of quiz view when timer finish
-            quizView.setAttribute("style", "display: none;");
-            endView.setAttribute("style", "display: visible;");
+  //////////////////////change to end of quiz view when timer finish
+            // quizView.setAttribute("style", "display: none;");
+            // endView.setAttribute("style", "display: visible;");
             userScore = Math.round(correctAnswers/questionTextArray.length*100);
             scoreText.textContent = userScore;
         }
@@ -100,42 +101,50 @@ function saveHighScore () {
       theInitials: theInitials,
     };
 
-    //save to locel storage
+    //save to local storage
     highScores.push(newScore);
+    highScorePlacecholder.push(highScores);
     window.localStorage.setItem("highscores", JSON.stringify(highScores));
   }
 
-  //change to scoreView
-  beforeView.setAttribute("style", "display: none;");
-  quizView.setAttribute("style", "display: none;");
-  endView.setAttribute("style", "display: none;");
-  scoreView.setAttribute("style", "display: visible;")
-  // need to populate a list in a loop with scores array
-  // for (i = 0; i < highScores.length; i++) {
-  // }
-  var temp = ["ESB - 100", "ABC - 100", "DEF - 100"];
-  // var temp = highScores.toString();
-  for (i = 0; i < temp.length; i++) {
-    liEl.textContent = temp[0];
-    // liEl.setAttribute();
-    scoreList.appendChild(liEl);
+  /////////////////////////change to scoreView
+  // beforeView.setAttribute("style", "display: none;");
+  // quizView.setAttribute("style", "display: none;");
+  // endView.setAttribute("style", "display: none;");
+  // scoreView.setAttribute("style", "display: visible;")
+
+  // populate a list in a loop with scores array
+  var liEL = [];
+
+  for (i = 0; i < highScores.length; i++) {
+    // var tempInitials = highScores[i].theInitials;
+    // var tempScore = highScores[i].theScore;
+    liEL.push(document.createElement("li"));
+    liEL[i].textContent = highScores[i].theInitials + " - " + highScores[i].theScore;
+    // liEL[i].textContent = tempInitials + " - " + tempScore;
+    scoreList.appendChild(liEL[i]);
   }
 
 }
 
 function clearHighScores() {
-  window.localStorage.removeItem("highscores");
+  window.localStorage.clear();
+  for (i = 0; i < highScorePlacecholder.length; i++) {
+    scoreList.removeChild(liEL[i]);
+  }
 }
 
 function setQuestionText() {
+  //populate quiz questions and answer choices
   questionText.textContent = questionTextArray[questionIndex];
   choiceButton1.textContent = choice1Text[questionIndex];
   choiceButton2.textContent = choice2Text[questionIndex];
   choiceButton3.textContent = choice3Text[questionIndex];
   choiceButton4.textContent = choice4Text[questionIndex];
-  if (correctAnswers == 0){
-    questionResultText.textContent = "";
-  } else {
+  questionResultText.textContent = "";
+
+  //indicate if answer is correct or not
+  if (answerCount) {
     if (resultText) {
       questionResultText.setAttribute("style", "color: green;")
       questionResultText.textContent = "CORRECT";
@@ -147,6 +156,7 @@ function setQuestionText() {
 }
 
 function checkAnswer(x) {
+  answerCount++;
     if (x == correctAnswerIndex[questionIndex]) {
       correctAnswers++;
       resultText = true;
@@ -155,8 +165,8 @@ function checkAnswer(x) {
       timeLeft = timeLeft - 10;
     }
     if (questionIndex == questionTextArray.length-1) {
-      //changes to endView
-      endView.setAttribute("style", "display: none;");
+      //////////////////////changes to endView
+      // endView.setAttribute("style", "display: none;");
       timeLeft = 1;
     } else {
       questionIndex++;
@@ -164,7 +174,7 @@ function checkAnswer(x) {
     }
 }
 
-init();
+// init();
 
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", saveHighScore);
