@@ -2,8 +2,6 @@ var timerSpan = document.getElementById("time-left");
 var beforeView = document.getElementById("before-start");
 var quizView = document.getElementById("quiz-start");
 var endView = document.getElementById("quiz-over");
-var scoreView = document.getElementById("high-scores");
-var highScoreButton = document.getElementById("view-scores");
 var startButton = document.getElementById("start-button");
 var submitButton = document.getElementById("submit");
 var questionText = document.getElementById("question");
@@ -11,22 +9,15 @@ var choiceButton1 = document.getElementById("choice-1");
 var choiceButton2 = document.getElementById("choice-2");
 var choiceButton3 = document.getElementById("choice-3");
 var choiceButton4 = document.getElementById("choice-4");
-var clearButton = document.getElementById("clear-scores");
 var questionResultText = document.getElementById("question-result");
 var scoreText = document.getElementById("user-score");
 var userInitials = document.getElementById("user-initials");
 var userScore = "";
 var timeLeft = 40;
-var timerSpeed = 1000;
 var clickCount = 0;
 var correctAnswers = 0;
 var answerCount = 0;
-var answerString = "";
 var resultText = true;
-
-var scoreList = document.getElementById("scores");
-var highScorePlacecholder = [];
-// var liEl = document.createElement("li");
 
 var questionIndex = 0;
 var questionTextArray = [
@@ -57,16 +48,15 @@ var choice4Text = [
 var correctAnswerIndex = [3,4,1,4];
 
 function init() {
-  ///////////////////////set initial view
+  //set initial view
   quizView.setAttribute("style", "display: none;");
   endView.setAttribute("style", "display: none;");
-  scoreView.setAttribute("style", "display: none;");
 }
 
 function startQuiz() {
-  //////////////////////change view on start
-  // beforeView.setAttribute("style", "display: none;");
-  // quizView.setAttribute("style", "display: visible;");
+  //change view on start
+  beforeView.setAttribute("style", "display: none;");
+  quizView.setAttribute("style", "display: visible;");
 
   setQuestionText();
 
@@ -75,13 +65,13 @@ function startQuiz() {
 
         if (!timeLeft) {
             clearInterval(gameInterval);
-  //////////////////////change to end of quiz view when timer finish
-            // quizView.setAttribute("style", "display: none;");
-            // endView.setAttribute("style", "display: visible;");
+            //change to end of quiz view when timer finish
+            quizView.setAttribute("style", "display: none;");
+            endView.setAttribute("style", "display: visible;");
             userScore = Math.round(correctAnswers/questionTextArray.length*100);
             scoreText.textContent = userScore;
         }
-    }, timerSpeed)
+    }, 1000)
         timerSpan.textContent = timeLeft;
 }
 
@@ -89,10 +79,11 @@ function startQuiz() {
 function saveHighScore () {
   //get value of input box
   var theInitials = userInitials.value.trim();
+  userInitials.textContent = "";
 
   //make sure value wasn't empty
   if (theInitials !== "") {
-    //get saved scores from local storage, or if npot any, set to empty array
+    //get saved scores from local storage, or if not any, set to empty array
     var highScores = JSON.parse(window.localStorage.getItem("highscores")) || [];
 
     //format new score object for current user
@@ -101,36 +92,10 @@ function saveHighScore () {
       theInitials: theInitials,
     };
 
-    //save to local storage
+    //save to local storage and opens a new page with high scores listed
     highScores.push(newScore);
-    highScorePlacecholder.push(highScores);
     window.localStorage.setItem("highscores", JSON.stringify(highScores));
-  }
-
-  /////////////////////////change to scoreView
-  // beforeView.setAttribute("style", "display: none;");
-  // quizView.setAttribute("style", "display: none;");
-  // endView.setAttribute("style", "display: none;");
-  // scoreView.setAttribute("style", "display: visible;")
-
-  // populate a list in a loop with scores array
-  var liEL = [];
-
-  for (i = 0; i < highScores.length; i++) {
-    // var tempInitials = highScores[i].theInitials;
-    // var tempScore = highScores[i].theScore;
-    liEL.push(document.createElement("li"));
-    liEL[i].textContent = highScores[i].theInitials + " - " + highScores[i].theScore;
-    // liEL[i].textContent = tempInitials + " - " + tempScore;
-    scoreList.appendChild(liEL[i]);
-  }
-
-}
-
-function clearHighScores() {
-  window.localStorage.clear();
-  for (i = 0; i < highScorePlacecholder.length; i++) {
-    scoreList.removeChild(liEL[i]);
+    window.location.href = "highscores.html";
   }
 }
 
@@ -155,6 +120,7 @@ function setQuestionText() {
   }
 }
 
+//finds out if the user chose the correct answer
 function checkAnswer(x) {
   answerCount++;
     if (x == correctAnswerIndex[questionIndex]) {
@@ -165,8 +131,8 @@ function checkAnswer(x) {
       timeLeft = timeLeft - 10;
     }
     if (questionIndex == questionTextArray.length-1) {
-      //////////////////////changes to endView
-      // endView.setAttribute("style", "display: none;");
+      //changes to endView
+      endView.setAttribute("style", "display: none;");
       timeLeft = 1;
     } else {
       questionIndex++;
@@ -174,13 +140,10 @@ function checkAnswer(x) {
     }
 }
 
-// init();
+init();
 
 startButton.addEventListener("click", startQuiz);
 submitButton.addEventListener("click", saveHighScore);
-clearButton.addEventListener("click", clearHighScores);
-highScoreButton.addEventListener("click", saveHighScore);
-//maybe play a sound on correct or incorrect
 choiceButton1.addEventListener("click", function() {
   checkAnswer(1);
 });

@@ -10,14 +10,13 @@
 </head>
 <body>
   <header>
-      <a id= "view-scores" href="#">View High Scores</a>
+      <a id= "view-scores" href="highscores.html">View High Scores</a>
       <p id="timer">Time Left: <span id="time-left">0</span></p>
   </header>
   <main>
     <section id="before-start" class="start-container">
         <h1>Coding Quiz</h1>
         <p>Try to answer the code related questions within the time limit.
-          <br> 
            Keep in mind incorrect answers will not only penalize your score, 
            but will also reduce your time.</p>
         <button id="start-button">Start</button>
@@ -30,7 +29,7 @@
             <li><button id="choice-3">3: Choice 3</button></li>
             <li><button id="choice-4">4: Choice 4</button></li>
         </ul>
-        <span id="question-result">Questions are unanswered</span>
+        <span id="question-result"></span>
     </section>
     <section id="quiz-over" class="result-container">
         <h1>All Done!</h1>
@@ -39,12 +38,12 @@
         <input type="text" id="user-initials" name="user-initials">
         <button id="submit">Submit</button>
     </section>
-    <section id="high-scores" class="score-container">
+    <!-- <section id="high-scores" class="score-container">
         <h1>High Scores</h1>
         <ol id="scores"></ol>
         <button id="go-back"><a href="index.html">Back to Quiz</a></button>
         <button id="clear-scores">Clear high scores</button>
-    </section>
+    </section> -->
   </main>
   <footer>
 
