@@ -21,31 +21,41 @@ var resultText = true;
 
 var questionIndex = 0;
 var questionTextArray = [
-  "Why did the chicken cross the road? Answer: To get to ___________.",
-  "What is your favorite color?",
-  "How many hours are in a day?",
-  "The answer is A"];
+  "'function' and 'var' are known as:",
+  "JavaScript, what is a block 'of' statement?",
+  "Which one of the following is also known as Conditional Expression?",
+  "What we will get if we compare 'one' with '8' using the less than operator ('one'<8)?",
+  "In JavaScript, the x===y statement implies that:",
+  "A function which does not return a value is known as _____"];
 var choice1Text = [
-  "1: the food",
-  "Blue",
-  "24",
-  "4"];
+  "Data types",
+  "Conditional block",
+  "if-else",
+  "False",
+  "Both x and y are equal in value, type, and reference address.",
+  "Array"];
 var choice2Text = [
-  "2: the water",
-  "Red",
-  "16",
-  "3"];
+  "Prototypes",
+  "block that combines a number of statements into a single compound statement",
+  "immediate if",
+  "True",
+  "Both x and y are only equal in value.",
+  "Procedure"];
 var choice3Text = [
-  "3: the otherside",
-  "Yellow",
-  "36",
-  "2"];
+  "Expressions",
+  "block that contains a single statement",
+  "if-then-else",
+  "Undefined",
+  "Both are equal in  value and data type.",
+  "String"];
 var choice4Text = [
-  "4: Alpha Centauri",
-  "Flourescent Orange",
-  "72",
-  "1"];
-var correctAnswerIndex = [3,4,1,4];
+  "Declaration statements",
+  "a loop block",
+  "return if",
+  "Not a number",
+  "Neither is equal to the other",
+  "Variable"];
+var correctAnswerIndex = [4,2,2,1,3,2];
 
 function init() {
   //set initial view
@@ -69,7 +79,7 @@ function startQuiz() {
             quizView.setAttribute("style", "display: none;");
             endView.setAttribute("style", "display: visible;");
             userScore = Math.round(correctAnswers/questionTextArray.length*100);
-            scoreText.textContent = userScore;
+            scoreText.textContent = userScore + "\%";
         }
     }, 1000)
         timerSpan.textContent = timeLeft;
