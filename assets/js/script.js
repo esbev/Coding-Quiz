@@ -12,6 +12,7 @@ var choiceButton4 = document.getElementById("choice-4");
 var questionResultText = document.getElementById("question-result");
 var scoreText = document.getElementById("user-score");
 var userInitials = document.getElementById("user-initials");
+
 var userScore = "";
 var timeLeft = 40;
 var clickCount = 0;
